@@ -1,1 +1,1 @@
-from .compatible_keys import key_analysis, process_likelihood
+from .compatible_keys import analyse_melody, process_likelihood
