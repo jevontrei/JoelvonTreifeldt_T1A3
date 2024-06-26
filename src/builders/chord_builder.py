@@ -1,17 +1,17 @@
-def triad_builder(scale, degree):
-    print(f"Scale: {scale}, Degree: {degree}")
+def triad_builder(scale, degree, qualities):
+    # print(f"Scale: {scale}, Degree: {degree}")
     # Offest zero indexing:
     degree -= 1
     triad = []
+    # Define ... 
+    name = scale[degree] + qualities[degree]
     for k in range(3):
         # print(f"This index: {(degree + (k * 2)) % 7}")
         triad.append(scale[(degree + (k * 2)) % 7])
         # print(f"Progress shot of triad: {triad}")
-    return triad
+    return name, triad
 
 
 def chord_scale_builder(scale):
+    print()
     return
-
-# def seventh_chord_builder():
-#     return

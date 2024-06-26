@@ -1,6 +1,16 @@
 
 # i'm repeating myself twice here ... make it more elegant and just do it all in one
+# Clean commas and space characters; format upper/lower case
+
 def format_input(notes):
+    """_summary_
+
+    Args:
+        notes (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     # try:
     # except:
     # catch:
@@ -24,11 +34,12 @@ def format_input(notes):
             if len(notes[i]) == 2:
                 notes[i] = notes[i][0] + notes[i][1].lower()
                 # print(melody[i])
-                input = notes
+                # Store melody notes in a set to remove duplicate values:
+                input = set(notes)
             elif len(notes[i]) == 1:
                 notes[i] += "_"
                 # print(melody[i])
-                input = notes
+                input = set(notes)
             else:
                 input = f"Error when parsing '{notes[i]}'! Please enter note name/s with 1 or 2 characters."
                 break
