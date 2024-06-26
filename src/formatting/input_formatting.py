@@ -4,7 +4,7 @@ def format_input(notes):
     # try:
     # except:
     # catch:
-    # raise:    
+    # raise:
     # print(notes)
     if type(notes) == str:
         notes = notes.strip(" ").upper()
@@ -33,6 +33,7 @@ def format_input(notes):
                 input = f"Error when parsing '{notes[i]}'! Please enter note name/s with 1 or 2 characters."
                 break
     else:
+        # TypeError or ValueError?
         print("TypeError! Please enter a string or a list.")
         return
     return input
