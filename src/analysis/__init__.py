@@ -1,1 +1,1 @@
-from .compatible_keys import key_analysis, likely_processor
+from .compatible_keys import key_analysis, process_likelihood

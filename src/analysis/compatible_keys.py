@@ -44,7 +44,7 @@ def key_analysis(mel, keys):
     return likely_keys
 
 
-def likely_processor(likely_keys):
+def process_likelihood(likely_keys):
     """_summary_
 
     Args:
