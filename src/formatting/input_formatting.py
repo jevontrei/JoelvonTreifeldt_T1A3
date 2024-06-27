@@ -2,7 +2,7 @@
 # i'm repeating myself twice here ... make it more elegant and just do it all in one
 # Clean commas and space characters; format upper/lower case
 
-def format_input(notes):
+def format_input_notes(notes):
     """_summary_
 
     Args:

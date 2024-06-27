@@ -1,2 +1,2 @@
-from .input_formatting import format_input, format_input_chords
-from .output_formatting import format_output, format_output_chords
+from .input_formatting import format_input_notes, format_input_chords
+from .output_formatting import format_output_notes, format_output_chords

@@ -1,4 +1,4 @@
-# The scale_builder (function?) takes a root note as input and constructs a major scale on that note
+# This function takes a root note as input and constructs a major scale on that note (for all 12 root notes)
 
 def build_all_scales(letters, intervals):
     """_summary_

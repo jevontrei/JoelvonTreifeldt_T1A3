@@ -1,5 +1,5 @@
 # This function ...
-def format_output(rename):
+def format_output_notes(rename):
     """_summary_
 
     Args:
