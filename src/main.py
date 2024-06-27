@@ -30,8 +30,9 @@ def main():
     print()
 
     while True:
-        selection = int(input("Select an option between 1 and 4: ").strip(" "))
+        selection = int(input("Select an option between 1 and 6: ").strip(" "))
         # could also use match case instead here:
+        
         if selection == 1:
             print()
             # Get input string and split it into a list
@@ -82,7 +83,7 @@ def main():
             name, chord = build_triad(
                 input_scale, input_degree, major_scale_qualities)
             # now don't forget to unformat chord!!!
-            format_output_chords()
+            # format_output_chords()
             print(
                 f"In the key of {input_note}, chord {input_degree} is {name}: {chord}")
             print()
@@ -108,17 +109,28 @@ def main():
             # triads = {}
            # return ?
 
+
         elif selection == 5:
             print()
-            analyse_progression()
+            my_progression = input("Enter a progression of triads from a single key, separated by commas, e.g. 'Emin, Amin, Dmin, Gmaj'.\n(Hint: use the chord scale builder (option 4) if unsure of which chords fit together): ")
+            result = analyse_progression(my_progression, all_keys)
+            print(result)
+            
+            
         elif selection == 6:
             print()
-            print("So long!")
+            print("So long! Thanks for playing.")
             print()
             break
+        
+        
+        
         else:
             print()
             print("Sorry, invalid! Please enter a number between 1 and 6.")
+            
+            
+            
         # except Exception as e:
         #     print(f"Oops! Unexpected error: {e}")
         #     return ""
