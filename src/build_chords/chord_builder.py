@@ -1,5 +1,18 @@
 def build_triad(scale, degree, qualities):
-    # print(f"Scale: {scale}, Degree: {degree}")
+    """_summary_
+
+    Args:
+        scale (list): _description_
+        degree (int): _description_
+        qualities (list): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    print()
+    # print(f"Scale: {scale}, {type(scale)}")
+    # print(f"Degree: {degree}, {type(degree)}")
+    # print(f"Qualities: {qualities}, {type(qualities)}")
     # Offest zero indexing:
     degree -= 1
     triad = []
