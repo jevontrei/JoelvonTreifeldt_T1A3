@@ -4,7 +4,7 @@ from build_scales import build_all_scales, build_penta
 from formatting import format_input_notes, format_output_notes, format_input_chords, format_output_chords
 import os
 
-# os.system("clear")
+os.system("clear")
 
 # Initialise global variables; Define root note names, scale intervals and qualities:
 roots = ["A_", "Bb", "B_", "C_", "Db", "D_",
@@ -12,6 +12,8 @@ roots = ["A_", "Bb", "B_", "C_", "Db", "D_",
 major_scale_intervals = [0, 2, 4, 5, 7, 9, 11]
 major_scale_qualities = ["maj", "min", "min", "maj", "maj", "min", "dim"]
 all_keys = build_all_scales(roots, major_scale_intervals)
+
+
 # print(f"All keys: {all_keys}")
 # print(f"Root notes; {roots}")
 
@@ -19,20 +21,24 @@ all_keys = build_all_scales(roots, major_scale_intervals)
 def main():
     # try:
 
-    print("Welcome! Let's play. What would you like to investigate?")
-    print()
-    print("1. Analyse a melody")
-    print("2. Build a pentatonic scale")
-    print("3. Find a specific chord within a key")
-    print("4. Build a chord scale")
-    print("5. Analyse a chord progression")
-    print("6. Exit")
-    print()
-
     while True:
+
+        print()
+        print("`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,")
+        print()
+        print("Welcome! Let's play. What would you like to investigate?")
+        print()
+        print("1. Analyse a melody")
+        print("2. Build a pentatonic scale")
+        print("3. Find a specific chord within a key")
+        print("4. Build a chord scale")
+        print("5. Analyse a chord progression")
+        print("6. Exit")
+        print()
+
         selection = int(input("Select an option between 1 and 6: ").strip(" "))
         # could also use match case instead here:
-        
+
         if selection == 1:
             print()
             # Get input string and split it into a list
@@ -96,7 +102,7 @@ def main():
             which_chord_scale = format_input_notes(which_chord_scale)
             which_chord_scale = all_keys[which_chord_scale]
 
-            chord_scale = build_chord_scale(
+            chord_scale, chord_names = build_chord_scale(
                 which_chord_scale, major_scale_qualities)
 
             # print(chord_scale)
@@ -106,31 +112,37 @@ def main():
 
             # print(chord_scale.index(p))
             print()
+            # print(f"chord_scale: {chord_scale}")
+            # print(f"chord_names: {chord_names}")
             # triads = {}
            # return ?
 
-
         elif selection == 5:
             print()
-            my_progression = input("Enter a progression of triads from a single key, separated by commas, e.g. 'Emin, Amin, Dmin, Gmaj'.\n(Hint: use the chord scale builder (option 4) if unsure of which chords fit together): ")
-            result = analyse_progression(my_progression, all_keys)
-            print(result)
+
+            # all_chord_scales = {}
+            # for i in key_centers:
+            #  .
+
+            my_progression = input(
+                "Enter a progression of triads from a single key, separated by commas, e.g. 'Emin, Amin, Dmin, Gmaj'.\n(Hint: use the chord scale builder (option 4) if unsure of which chords fit together): ").lower()
             
+            result = analyse_progression(
+                my_progression, all_keys, major_scale_qualities)
+
+            print(
+                f"These chord/s fit within the key/s of {result}. The Roman Numeral Analysis is ... .")
             
         elif selection == 6:
             print()
             print("So long! Thanks for playing.")
             print()
             break
-        
-        
-        
+
         else:
             print()
             print("Sorry, invalid! Please enter a number between 1 and 6.")
-            
-            
-            
+
         # except Exception as e:
         #     print(f"Oops! Unexpected error: {e}")
         #     return ""
