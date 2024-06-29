@@ -1,35 +1,36 @@
 from .chord_builder import build_triad
 
+# This function ...
 
-def build_chord_scale(scale_list, qualities_list):
+def build_chord_scale(scale, qualities):
     """_summary_
 
     Args:
-        scale_list (list): _description_
-        qualities_list (list): _description_
+        scale (list): _description_
+        qualities (list): _description_
 
     Returns:
         _type_: _description_
     """
+    
     try:
-
-        # print(f"scale_list: {scale_list}, {type(scale_list)}")
-        # print(f"qualities_list: {qualities_list}, {type(qualities_list)}")
-
-        # Initialise dictionary for storing chords:
+        # Initialise dictionary for storing chords and list for names:
         chord_scale = {}
-        print()
-        print(f"In the key of {scale_list[0][:]} major, the chord scale is:")
         names = []
+        
+        print()
+        print(f"In the key of {scale[0][:]} major,")
+        
+        
+        
         for degree in range(7):
             degree += 1
             name, chord = build_triad(
-                scale_list, degree, qualities_list)
+                scale, degree, qualities)
+            
             chord_scale[name] = chord
             names.append(name)
             print(f"Chord {degree} is {name}: {chord_scale[name]}")
-
-            # append to list and return?
 
         return chord_scale, names
 
@@ -37,4 +38,3 @@ def build_chord_scale(scale_list, qualities_list):
         print(f"Oops! Unexpected error: {e}.")
         return ""
 
-# def build_all_chord_scales():

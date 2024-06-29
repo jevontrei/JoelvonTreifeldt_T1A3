@@ -8,6 +8,7 @@ def format_output_notes(rename):
     Returns:
         _type_: _description_
     """
+    
     # unnecessary bc i've already cleaned it all up in .input_formatting:?
     try:
         # except:
@@ -16,14 +17,15 @@ def format_output_notes(rename):
         for key in range(len(rename)):
             if rename[key][-1] == "_":
                 rename[key] = rename[key][0]
+                
         return rename
 
     except Exception as e:
         print(f"Oops! Unexpected error: {e}.")
         return ""
 
-# This function ...
 
+# This function ... DELET?:
 
 def format_output_chords():
     """_summary_
@@ -31,6 +33,7 @@ def format_output_chords():
     Returns:
         _type_: _description_
     """
+    
     try:
         # except:
         # catch:

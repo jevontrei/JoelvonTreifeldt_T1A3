@@ -6,7 +6,7 @@ import os
 
 os.system("clear")
 
-# Initialise global variables; Define root note names, scale intervals and qualities:
+# Initialise global variables; Define root note names, scale intervals, scale qualities, and keys:
 roots = ["A_", "Bb", "B_", "C_", "Db", "D_",
          "Eb", "E_", "F_", "Gb", "G_", "Ab"]
 major_scale_intervals = [0, 2, 4, 5, 7, 9, 11]
@@ -14,9 +14,7 @@ major_scale_qualities = ["maj", "min", "min", "maj", "maj", "min", "dim"]
 all_keys = build_all_scales(roots, major_scale_intervals)
 
 
-# print(f"All keys: {all_keys}")
-# print(f"Root notes; {roots}")
-
+# This main function ...
 
 def main():
     """_summary_
@@ -24,6 +22,7 @@ def main():
     Returns:
         _type_: _description_
     """
+
     try:
         while True:
 
@@ -45,33 +44,41 @@ def main():
 
             if selection == 1:
                 print()
-                # Get input string and split it into a list
+
+                # Get input string and split it into a list:
                 melody_input = input(
                     "Enter two or more notes separated by commas, e.g. Db, A, B, E (use flats, not sharps): ").split(",")
+
                 # assert()
                 # error handling: what if they enter e.g. a,b or Hsharp? print message except catch raise etc
+
                 my_melody = format_input_notes(melody_input)
 
                 most_likely_keys = analyse_melody(my_melody, all_keys)
+
                 # rename to formatted_output or something
                 most_likely_keys = format_output_notes(most_likely_keys)
                 result = process_likelihood(most_likely_keys)
+
                 print(result)
-                # also print compatible chords to accompany melody!!!!!!!
                 print()
+
                 # return ?
 
             elif selection == 2:
                 print()
                 request = input(
                     "Enter a root note and a quality separated by a comma, e.g. 'E, min' or 'F, maj': ")
+
                 try:
                     request = request.split(",")
                     tonic_input = format_input_notes(request[0])
                     result = build_penta(tonic_input, roots,
                                          request[1].strip(" ").lower())
+
                     if result != []:
                         print(result)
+
                 except Exception as e:
                     print(
                         f"Sorry, unexpected error: {e}. Please enter a valid input.")
@@ -81,21 +88,26 @@ def main():
 
                 what_chord = input(
                     "Now enter a scale and a degree between 1 and 7 (e.g. To find the 5th chord in the key of D, enter 'D, 5') separated by a comma: ").split(",")
+
                 input_note = format_input_notes(what_chord[0])
                 input_scale = all_keys[input_note]
                 input_degree = int(what_chord[1].strip(" "))
                 name, chord = build_triad(
                     input_scale, input_degree, major_scale_qualities)
+
                 # now don't forget to unformat chord!!!
                 # format_output_chords()
+
                 print(
                     f"In the key of {input_note}, chord {input_degree} is {name}: {chord}.")
+
                 # return ?
 
             elif selection == 4:
                 print()
                 which_chord_scale = input(
                     "Cool! Okay please enter ONE root note (e.g. D, Ab, or B): ")
+
                 which_chord_scale = format_input_notes(which_chord_scale)
                 which_chord_scale = all_keys[which_chord_scale]
 
@@ -131,5 +143,6 @@ def main():
         return ""
 
 
+# Ensure ...
 if __name__ == "__main__":
     main()
