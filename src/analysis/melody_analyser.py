@@ -14,23 +14,31 @@ def analyse_melody(mel, keys):
     # THIS FN IS BROKEN! e.g. enter "e,f,gb,g" and it gives a wrong answer
 
     try:
-        # print(f"mel: {mel}, {type(mel)}")
-        # print(f"keys: {keys}, {type(keys)}")
 
         print()
-
+        print(f"mel: {mel}, {type(mel)}")
+        print(f"keys: {keys}, {type(keys)}")
+        print()
+        
         analysis = []
+
+        print("-------------------------------------------")
 
         for note in mel:
             print(f"note: {note}")
-            print("--------")
+            print("-------------------------------------------")
             for scale in keys:
                 if note in keys[scale]:
-                    # print(f"scale: {scale}")
+                    print(f"scale: {scale}")
                     analysis.append(scale)
                     print(f"analysis: {analysis}")
 
                 print("--------")
+            print("-------------------------------------------")
+
+        # Remove duplicates
+        # analysis = list(set(analysis))
+        # print(f"analysis: {analysis}")
 
         print("--------")
 
