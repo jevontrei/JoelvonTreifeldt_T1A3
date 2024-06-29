@@ -2,14 +2,24 @@
 
 def build_all_scales(letters, intervals):
     """_summary_
+
+    Args:
+        letters (_type_): _description_
+        intervals (_type_): _description_
+
+    Returns:
+        _type_: _description_
     """
-    # try:
-    scales = []
-    for i in range(12):
-        key = []
-        for k in intervals:
-            key.append(letters[(i + k) % 12])
-        scales.append(key)
-    all_scales = dict(zip(letters, scales))
-    
-    return all_scales
+    try:
+        scales = []
+        for i in range(12):
+            key = []
+            for k in intervals:
+                key.append(letters[(i + k) % 12])
+            scales.append(key)
+        all_scales = dict(zip(letters, scales))
+        
+        return all_scales
+    except Exception as e:
+        print(f"Oops! Unexpected error: {e}.")
+        return ""

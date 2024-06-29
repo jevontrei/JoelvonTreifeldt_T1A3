@@ -50,6 +50,7 @@ def format_input_notes(notes):
     # except TypeError:
     #     print(f"hmmmm....")
     #     return ""
+    
     # do my if/elif/else blocks above need to be replaced by this error handling?:
     except Exception as e:
         print(f"Whoops! An unexpected error occurred: {e}.")
@@ -58,8 +59,17 @@ def format_input_notes(notes):
 
 
 def format_input_chords():
-    # try:
-    # except:
-    # catch:
-    # raise:
-    return
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+    try:
+        # except:
+        # catch:
+        # raise:
+        return
+    
+    except Exception as e:
+        print(f"Oops! Unexpected error: {e}.")
+        return ""

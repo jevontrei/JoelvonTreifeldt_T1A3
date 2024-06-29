@@ -3,25 +3,40 @@ def format_output_notes(rename):
     """_summary_
 
     Args:
-        most_likely_key (_type_): _description_
+        rename (_type_): _description_
 
     Returns:
         _type_: _description_
     """
-    # try:  # unnecessary bc i've already cleaned it all up in .input_formatting?
-    # except:
-    # catch:
-    # raise:
-    for key in range(len(rename)):
-        if rename[key][-1] == "_":
-            rename[key] = rename[key][0]
-    return rename
+    # unnecessary bc i've already cleaned it all up in .input_formatting:?
+    try:
+        # except:
+        # catch:
+        # raise:
+        for key in range(len(rename)):
+            if rename[key][-1] == "_":
+                rename[key] = rename[key][0]
+        return rename
+
+    except Exception as e:
+        print(f"Oops! Unexpected error: {e}.")
+        return ""
 
 # This function ...
 
+
 def format_output_chords():
-    # try:
-    # except:
-    # catch:
-    # raise:
-    return
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+    try:
+        # except:
+        # catch:
+        # raise:
+        return
+
+    except Exception as e:
+        print(f"Oops! Unexpected error: {e}.")
+        return ""

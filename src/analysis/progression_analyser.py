@@ -4,95 +4,78 @@ import os
 
 
 def analyse_progression(input_progression, key_centers, qualities):
-    print()
-    input_progression = input_progression.split(",")
-    # Formatting:
-    # use format chord module instead of this?:
-    for i in range(len(input_progression)):
-        input_progression[i] = input_progression[i].strip(" ")
-        if input_progression[i][-3:] == "maj":
-            input_progression[i] = format_input_notes(
-                input_progression[i][:-3]) + "maj"
-        elif input_progression[i][-3:] == "min":
-            input_progression[i] = format_input_notes(
-                input_progression[i][:-3]) + "min"
-        else:
-            print("Hmmmm please enter valid chords.")
-            return ""
-    print(f"input_progression: {input_progression}")
+    """_summary_
 
+    Args:
+        input_progression (_type_): _description_
+        key_centers (_type_): _description_
+        qualities (_type_): _description_
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+    Returns:
+        _type_: _description_
+    """
+    try:
+        print()
+        input_progression = input_progression.split(",")
 
-    # MOVE TESE INSIDE LOOOOP?
-    pre_candidates = []
-    post_candidates = []
+        # Formatting: use format chord module instead of this?:
+        for i in range(len(input_progression)):
+            input_progression[i] = input_progression[i].strip(" ")
 
+            if input_progression[i][-3:] == "maj":
+                input_progression[i] = format_input_notes(
+                    input_progression[i][:-3]) + "maj"
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+            elif input_progression[i][-3:] == "min":
+                input_progression[i] = format_input_notes(
+                    input_progression[i][:-3]) + "min"
 
-    # fix this:
-    for chord in input_progression:
-        print(f"chord: {chord}")
+            else:
+                print("Hmmmm please enter valid chords.")
+                return ""
+
+        # Initialise sets for candidate keys:
+        pre_candidates = set()
+        post_candidates = set()
 
         for key_center in key_centers.keys():
-            print(f"key_center: {key_center}, {type(key_center)}")
-            # print(f"qualities: {qualities}, {type(qualities)}")
 
             chord_scale, chord_names = build_chord_scale(
                 key_centers[key_center], qualities)
-            # print(f"chord_scale: {chord_scale}")
-            print(f"chord_names: {chord_names}")
-            if chord in chord_names:
-                if pre_candidates == []:
-                    pre_candidates.append(key_center)
-                    print(f"pre_candidates: {pre_candidates}")
-                elif pre_candidates != []:
-                    # for i in pre_candidates:
-                    # if i in key_centers[key_center]:
-                    post_candidates.append(key_center)
-                    # print(f"post_candidates: {post_candidates}")
-            else:
-                # ???:
-                pass
 
-            print(f"pre_candidates: {pre_candidates}")
-            print(f"post_candidates: {post_candidates}")
-            candidates = []
-            for i in pre_candidates:
-                if i in post_candidates:
-                    candidates.append(i)
-                    print(f"candidates: {candidates}")
-            # print(f"key_centers[key_center]: {key_centers[key_center]}")
-            # if chord in key_centers[key_center]:
-            #     candidates.append(chord)
-            #     print(f"candidates: {candidates}")
-        print("--------------------")
+            if input_progression[0] in chord_names:
+                pre_candidates.add(key_center)
+
+            if len(input_progression) == 1:
+                candidates = pre_candidates
+                continue
+
+            if len(input_progression) > 1:
+
+                for chord in input_progression[1:]:
+
+                    if chord in chord_names:
+                        post_candidates.add(key_center)
+
+                    # else:
+                        # pass
+
+                    candidates = set()
+
+                    for i in pre_candidates:
+                        if i in post_candidates:
+                            candidates.add(i)
+
+            print()
+
+        os.system("clear")
+
         print()
-    # os.system("clear")
-    # print(f"candidates: {candidates}")
-    return candidates
+        print(f"Input progression: {input_progression}")
+        print()
+
+        return candidates
+
+    except Exception as e:
+        print(f"Oops! Unexpected error: {e}.")
+        return ""

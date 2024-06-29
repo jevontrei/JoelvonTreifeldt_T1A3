@@ -19,133 +19,116 @@ all_keys = build_all_scales(roots, major_scale_intervals)
 
 
 def main():
-    # try:
+    """_summary_
 
-    while True:
+    Returns:
+        _type_: _description_
+    """
+    try:
+        while True:
 
-        print()
-        print("`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,")
-        print()
-        print("Welcome! Let's play. What would you like to investigate?")
-        print()
-        print("1. Analyse a melody")
-        print("2. Build a pentatonic scale")
-        print("3. Find a specific chord within a key")
-        print("4. Build a chord scale")
-        print("5. Analyse a chord progression")
-        print("6. Exit")
-        print()
-
-        selection = int(input("Select an option between 1 and 6: ").strip(" "))
-        # could also use match case instead here:
-
-        if selection == 1:
             print()
-            # Get input string and split it into a list
-            melody_input = input(
-                "Enter two or more notes separated by commas, e.g. Db, A, B, E (use flats, not sharps): ").split(",")
-            # assert()
-            # error handling: what if they enter e.g. a,b or Hsharp? print message except catch raise etc
-            # print(f"Unformatted melody: {melody_input}")
-            my_melody = format_input_notes(melody_input)
-            # print(f"Formatted melody notes: {my_melody}")
-            # print("---------------------------")
-            most_likely_keys = analyse_melody(my_melody, all_keys)
-            # print(f"Most likely key/s: {most_likely_keys}")
-            # rename to formatted_output or something
-            most_likely_keys = format_output_notes(most_likely_keys)
-            # print(f"Re/un?formatted unprocessed most_likely_keys: {most_likely_keys}")
-            result = process_likelihood(most_likely_keys)
-            print(result)
-            # also print compatible chords to accompany melody!!!!!!!
+            print("`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,")
             print()
-            # return ?
+            print("Welcome! Let's play. What would you like to investigate?")
+            print()
+            print("1. Analyse a melody")
+            print("2. Build a pentatonic scale")
+            print("3. Find a specific chord within a key")
+            print("4. Build a chord scale")
+            print("5. Analyse a chord progression")
+            print("6. Exit")
+            print()
 
-        elif selection == 2:
-            print()
-            request = input(
-                "Enter a root note and a quality separated by a comma, e.g. 'E, min' or 'F, maj': ")
-            try:
-                request = request.split(",")
-                tonic_input = format_input_notes(request[0])
-                result = build_penta(tonic_input, roots,
-                                     request[1].strip(" ").lower())
-                if result != []:
-                    print(result)
-            except Exception as e:
+            selection = int(
+                input("Select an option between 1 and 6: ").strip(" "))
+
+            if selection == 1:
+                print()
+                # Get input string and split it into a list
+                melody_input = input(
+                    "Enter two or more notes separated by commas, e.g. Db, A, B, E (use flats, not sharps): ").split(",")
+                # assert()
+                # error handling: what if they enter e.g. a,b or Hsharp? print message except catch raise etc
+                my_melody = format_input_notes(melody_input)
+
+                most_likely_keys = analyse_melody(my_melody, all_keys)
+                # rename to formatted_output or something
+                most_likely_keys = format_output_notes(most_likely_keys)
+                result = process_likelihood(most_likely_keys)
+                print(result)
+                # also print compatible chords to accompany melody!!!!!!!
+                print()
+                # return ?
+
+            elif selection == 2:
+                print()
+                request = input(
+                    "Enter a root note and a quality separated by a comma, e.g. 'E, min' or 'F, maj': ")
+                try:
+                    request = request.split(",")
+                    tonic_input = format_input_notes(request[0])
+                    result = build_penta(tonic_input, roots,
+                                         request[1].strip(" ").lower())
+                    if result != []:
+                        print(result)
+                except Exception as e:
+                    print(
+                        f"Sorry, unexpected error: {e}. Please enter a valid input.")
+
+            elif selection == 3:
+                print()
+
+                what_chord = input(
+                    "Now enter a scale and a degree between 1 and 7 (e.g. To find the 5th chord in the key of D, enter 'D, 5') separated by a comma: ").split(",")
+                input_note = format_input_notes(what_chord[0])
+                input_scale = all_keys[input_note]
+                input_degree = int(what_chord[1].strip(" "))
+                name, chord = build_triad(
+                    input_scale, input_degree, major_scale_qualities)
+                # now don't forget to unformat chord!!!
+                # format_output_chords()
                 print(
-                    f"Sorry, unexpected error: {e}. Please enter a valid input.")
+                    f"In the key of {input_note}, chord {input_degree} is {name}: {chord}.")
+                # return ?
 
-        elif selection == 3:
-            print()
-            # triad_qualities = ["maj", "min", "dim"]  # add sus2, sus4
-            # print(f"Triad qualities: {triad_qualities}")
-            what_chord = input(
-                "Now enter a scale and a degree between 1 and 7 (e.g. To find the 5th chord in the key of D, enter 'D, 5') separated by a comma: ").split(",")
-            input_note = format_input_notes(what_chord[0])
-            input_scale = all_keys[input_note]
-            # print(f"Input scale: {input_scale}")
-            input_degree = int(what_chord[1].strip(" "))
-            name, chord = build_triad(
-                input_scale, input_degree, major_scale_qualities)
-            # now don't forget to unformat chord!!!
-            # format_output_chords()
-            print(
-                f"In the key of {input_note}, chord {input_degree} is {name}: {chord}")
-            print()
+            elif selection == 4:
+                print()
+                which_chord_scale = input(
+                    "Cool! Okay please enter ONE root note (e.g. D, Ab, or B): ")
+                which_chord_scale = format_input_notes(which_chord_scale)
+                which_chord_scale = all_keys[which_chord_scale]
+
+                chord_scale, chord_names = build_chord_scale(
+                    which_chord_scale, major_scale_qualities)
+
             # return ?
 
-        elif selection == 4:
-            print()
-            which_chord_scale = input(
-                "Cool! Okay please enter ONE root note (e.g. D, Ab, or B): ")
-            which_chord_scale = format_input_notes(which_chord_scale)
-            which_chord_scale = all_keys[which_chord_scale]
+            elif selection == 5:
+                print()
 
-            chord_scale, chord_names = build_chord_scale(
-                which_chord_scale, major_scale_qualities)
+                my_progression = input(
+                    "Enter a progression of triads from a single key, separated by commas, e.g. 'Emin, Amin, Dmin, Gmaj'.\n(Hint: use the chord scale builder (option 4) if unsure of which chords fit together): ").lower()
 
-            # print(chord_scale)
-            # for p in chord_scale:
-            #     for degree in range(1, 8):
-            #         print(f"Chord {degree} is None: {chord_scale[p]}")
+                result = analyse_progression(
+                    my_progression, all_keys, major_scale_qualities)
 
-            # print(chord_scale.index(p))
-            print()
-            # print(f"chord_scale: {chord_scale}")
-            # print(f"chord_names: {chord_names}")
-            # triads = {}
-           # return ?
+                print(
+                    f"These chord/s fit within the key/s of {result}.")
 
-        elif selection == 5:
-            print()
+            elif selection == 6:
+                print()
+                print("So long! Thanks for playing.")
+                print()
+                break
 
-            # all_chord_scales = {}
-            # for i in key_centers:
-            #  .
+            else:
+                print()
+                print("Sorry, invalid! Please enter a number between 1 and 6.")
 
-            my_progression = input(
-                "Enter a progression of triads from a single key, separated by commas, e.g. 'Emin, Amin, Dmin, Gmaj'.\n(Hint: use the chord scale builder (option 4) if unsure of which chords fit together): ").lower()
-            
-            result = analyse_progression(
-                my_progression, all_keys, major_scale_qualities)
-
-            print(
-                f"These chord/s fit within the key/s of {result}. The Roman Numeral Analysis is ... .")
-            
-        elif selection == 6:
-            print()
-            print("So long! Thanks for playing.")
-            print()
-            break
-
-        else:
-            print()
-            print("Sorry, invalid! Please enter a number between 1 and 6.")
-
-        # except Exception as e:
-        #     print(f"Oops! Unexpected error: {e}")
-        #     return ""
+    except Exception as e:
+        print(f"Oops! Unexpected error: {e}.")
+        return ""
 
 
 if __name__ == "__main__":
