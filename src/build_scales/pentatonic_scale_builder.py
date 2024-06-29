@@ -10,7 +10,7 @@ def build_penta(tonic, root_notes, quality):
     Returns:
         _type_: _description_
     """
-    
+
     try:
         # Define scale intervals:
         major_penta_intervals = [0, 2, 4, 7, 9]
@@ -26,15 +26,15 @@ def build_penta(tonic, root_notes, quality):
                 for k in major_penta_intervals:
                     penta.append(
                         root_notes[(root_notes.index(tonic) + k) % 12])
-                    
+
                 return penta
 
             elif quality == "min":
                 for k in minor_penta_intervals:
                     penta.append(
                         root_notes[(root_notes.index(tonic) + k) % 12])
-                    
-                return [penta]
+
+                return penta
 
             elif quality == "pls":
                 penta = []
@@ -43,10 +43,11 @@ def build_penta(tonic, root_notes, quality):
             else:
                 print(
                     "Oops! Please enter a valid root note and 'maj' or 'min' as the quality, or enter 'exit, pls'.")
-                
+
                 penta = []
                 return penta
 
     except Exception as e:
-        print(f"Oops! Unexpected error: {e}.")
+        print()
+        print(f"__build_penta__ Oops! Unexpected error: {e}.")
         return ""

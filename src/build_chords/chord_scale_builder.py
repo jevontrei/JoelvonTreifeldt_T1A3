@@ -19,9 +19,7 @@ def build_chord_scale(scale, qualities):
         names = []
         
         print()
-        print(f"In the key of {scale[0][:]} major,")
-        
-        
+        print(f">>> In the key of {scale[0][:]} major,")
         
         for degree in range(7):
             degree += 1
@@ -35,6 +33,6 @@ def build_chord_scale(scale, qualities):
         return chord_scale, names
 
     except Exception as e:
-        print(f"Oops! Unexpected error: {e}.")
+        print(f"__build_chord_scale__ Oops! Unexpected error: {e}.")
         return ""
 

@@ -1,0 +1,1 @@
+# see the lessons discord server week 8

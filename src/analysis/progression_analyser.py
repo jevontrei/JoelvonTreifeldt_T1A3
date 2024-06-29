@@ -20,7 +20,7 @@ def analyse_progression(input_progression, key_centers, qualities):
         print()
         input_progression = input_progression.split(",")
 
-        # Formatting: (use format chord module instead of this?)
+        # Formatting: ### (use format chord module instead of this?)
         for i in range(len(input_progression)):
             input_progression[i] = input_progression[i].strip(" ")
             if input_progression[i][-3:] == "maj":
@@ -55,9 +55,6 @@ def analyse_progression(input_progression, key_centers, qualities):
                     if chord in chord_names:
                         post_candidates.add(key_center)
 
-                    # else:
-                        # pass
-
                     candidates = set()
 
                     for i in pre_candidates:
@@ -75,5 +72,5 @@ def analyse_progression(input_progression, key_centers, qualities):
         return candidates
 
     except Exception as e:
-        print(f"Oops! Unexpected error: {e}.")
-        return ""
+        print(f"__analyse_progression__ Oops! Unexpected error: {e}.")
+        return  ### ""

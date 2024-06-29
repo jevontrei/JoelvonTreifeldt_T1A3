@@ -27,5 +27,5 @@ def build_all_scales(letters, intervals):
         return all_scales
     
     except Exception as e:
-        print(f"Oops! Unexpected error: {e}.")
+        print(f"__build_all_scales__ Oops! Unexpected error: {e}.")
         return ""

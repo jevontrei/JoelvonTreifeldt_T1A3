@@ -1,5 +1,5 @@
 
-# i'm repeating myself twice here ... make it more elegant and just do it all in one
+### i'm repeating myself twice here ... make it more elegant and just do it all in one
 # Clean commas and space characters; format upper/lower case
 # This function ...
 
@@ -13,9 +13,9 @@ def format_input_notes(notes):
         _type_: _description_
     """
 
-    # except:
-    # catch:
-    # raise:
+    ### except:
+    ### catch:
+    ### raise:
     try:
         if type(notes) == str:
             notes = notes.strip(" ").upper()
@@ -35,6 +35,7 @@ def format_input_notes(notes):
                 notes[i] = notes[i].upper().strip(" ")
                 if len(notes[i]) == 2:
                     notes[i] = notes[i][0] + notes[i][1].lower()
+                    
                     # Store melody notes in a set to remove duplicate values:
                     input = set(notes)
 
@@ -47,24 +48,25 @@ def format_input_notes(notes):
                     break
 
         else:
-            # TypeError or ValueError?:
+            ### TypeError or ValueError?:
             print("TypeError! Please enter a string or a list.")
             return
 
         return input
 
-    # except TypeError:
-    #     print(f"hmmmm....")
-    #     return ""
+    ### except TypeError:
+    ###     print(f"hmmmm....")
+    ###     return ""
 
-    # do my if/elif/else blocks above need to be replaced by this error handling?:
+    ### do my if/elif/else blocks above need to be replaced by this error handling?:
     except Exception as e:
-        print(f"Whoops! An unexpected error occurred: {e}.")
-        # return an empty set instead? make return types consistent
+        print(f"__format_input_notes__ Whoops! An unexpected error occurred: {e}.")
+        
+        ### return an empty set instead? make return types consistent!:
         return ""
 
 
-# This function ... DELET?
+### This function ... DELET?
 
 def format_input_chords():
     """_summary_
@@ -74,11 +76,8 @@ def format_input_chords():
     """
 
     try:
-        # except:
-        # catch:
-        # raise:
         return
 
     except Exception as e:
-        print(f"Oops! Unexpected error: {e}.")
+        print(f"__format_input_chords__ Oops! Unexpected error: {e}.")
         return ""

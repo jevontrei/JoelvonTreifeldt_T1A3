@@ -23,11 +23,13 @@ def main():
         _type_: _description_
     """
 
-    try:
-        while True:
-
+    while True:
+        try:
+            # Display welcome message:
+            print()
             print()
             print("`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,")
+            print()
             print()
             print("Welcome! Let's play. What would you like to investigate?")
             print()
@@ -39,10 +41,17 @@ def main():
             print("6. Exit")
             print()
 
+            # Get initial input from user:
             selection = int(
                 input("Select an option between 1 and 6: ").strip(" "))
 
+            os.system("clear")
+
             if selection == 1:
+                print()
+                print("Valid note names:")
+                for i in roots:
+                    print(i)
                 print()
 
                 # Get input string and split it into a list:
@@ -54,6 +63,9 @@ def main():
 
                 my_melody = format_input_notes(melody_input)
 
+                print()
+                print(f"Input melody: {my_melody}")
+
                 most_likely_keys = analyse_melody(my_melody, all_keys)
 
                 # rename to formatted_output or something
@@ -61,7 +73,6 @@ def main():
                 result = process_likelihood(most_likely_keys)
 
                 print(result)
-                print()
 
                 # return ?
 
@@ -70,18 +81,31 @@ def main():
                 request = input(
                     "Enter a root note and a quality separated by a comma, e.g. 'E, min' or 'F, maj': ")
 
-                try:
-                    request = request.split(",")
-                    tonic_input = format_input_notes(request[0])
-                    result = build_penta(tonic_input, roots,
-                                         request[1].strip(" ").lower())
+                # !Am i doubling up try/except blocks? it's here AND also in the module :S ... HOWEVER for some reason if i delete the main try/except block and just use the inner/module one, when it fails it doesn't go back to prompting user for input. why?
+                # try:
+                request = request.split(",")
 
-                    if result != []:
-                        print(result)
+                print()
+                print(f"Input: {request}")
 
-                except Exception as e:
+                tonic_input = format_input_notes(request[0])
+                quality_input = request[1].strip(" ").lower()
+                
+                if len(request) != 2 or len(tonic_input) != 2 or len(quality_input) != 3:
+                    print("Sorry, invalid input. Please try again.")
+                    continue
+
+                result = build_penta(tonic_input, roots,
+                                     quality_input)
+
+                if result != []:
                     print(
-                        f"Sorry, unexpected error: {e}. Please enter a valid input.")
+                        f">>> Your pentatonic scale is {result}.")
+
+                # except Exception as e:
+                #     print()
+                #     print(
+                #         f"__main__ Sorry, unexpected error: {e}. Please enter a valid input.")
 
             elif selection == 3:
                 print()
@@ -89,7 +113,15 @@ def main():
                 what_chord = input(
                     "Now enter a scale and a degree between 1 and 7 (e.g. To find the 5th chord in the key of D, enter 'D, 5') separated by a comma: ").split(",")
 
+                print()
+                print(f"Input: {what_chord}")
+
                 input_note = format_input_notes(what_chord[0])
+
+                if input_note not in all_keys.keys():
+                    print("Sorry, invalid input. Please try again.")
+                    continue
+
                 input_scale = all_keys[input_note]
                 input_degree = int(what_chord[1].strip(" "))
                 name, chord = build_triad(
@@ -99,7 +131,7 @@ def main():
                 # format_output_chords()
 
                 print(
-                    f"In the key of {input_note}, chord {input_degree} is {name}: {chord}.")
+                    f">>> In the key of {input_note}, chord {input_degree} is {name}: {chord}.")
 
                 # return ?
 
@@ -108,7 +140,15 @@ def main():
                 which_chord_scale = input(
                     "Cool! Okay please enter ONE root note (e.g. D, Ab, or B): ")
 
+                print()
+                print(f"Input: {which_chord_scale}")
+
                 which_chord_scale = format_input_notes(which_chord_scale)
+
+                if which_chord_scale not in all_keys.keys():
+                    print("Sorry, invalid input. Please try again.")
+                    continue
+
                 which_chord_scale = all_keys[which_chord_scale]
 
                 chord_scale, chord_names = build_chord_scale(
@@ -125,24 +165,32 @@ def main():
                 result = analyse_progression(
                     my_progression, all_keys, major_scale_qualities)
 
-                print(
-                    f"These chord/s fit within the key/s of {result}.")
+                if len(result) == 0:
+                    print()
+                    print("Sorry! Nothing to display. Either the input is invalid or these chords don't fit within one key. Future version of this app will be able to help you with more spicy progressions!")
+
+                else:
+                    print(
+                        f">>> These chord/s fit within the key/s of {result}.")
 
             elif selection == 6:
                 print()
-                print("So long! Thanks for playing.")
+                print(">>> So long! Thanks for playing.")
                 print()
-                break
+                return
 
             else:
                 print()
                 print("Sorry, invalid! Please enter a number between 1 and 6.")
 
-    except Exception as e:
-        print(f"Oops! Unexpected error: {e}.")
-        return ""
+        except Exception as e:
+            print()
+            os.system("clear")
+            print()
+            print(
+                f"__main__ Oops! Unexpected error: {e}. Please try again with a valid input.")
 
 
-# Ensure ...
+# Ensure ... :
 if __name__ == "__main__":
     main()
