@@ -33,6 +33,6 @@ def build_chord_scale(scale, qualities):
         return chord_scale, names
 
     except Exception as e:
-        print(f"__build_chord_scale__ Oops! Unexpected error: {e}.")
+        print(f"__build_chord_scale__ >>> Oops! Unexpected error: {e}.")
         return ""
 

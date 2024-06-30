@@ -32,7 +32,7 @@ def analyse_progression(input_progression, key_centers, qualities):
                     input_progression[i][:-3]) + "min"
 
             else:
-                print("Hmmmm please enter valid chords.")
+                print(">>> Hmmmm please enter valid chords.")
                 return ""
 
         # Initialise sets for candidate keys:
@@ -72,5 +72,5 @@ def analyse_progression(input_progression, key_centers, qualities):
         return candidates
 
     except Exception as e:
-        print(f"__analyse_progression__ Oops! Unexpected error: {e}.")
+        print(f"__analyse_progression__ >>> Oops! Unexpected error: {e}.")
         return  ### ""

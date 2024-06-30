@@ -64,21 +64,20 @@ def main():
 
                 if len(melody_input) < 2:
                     print()
-                    print("This will be better if you enter more than one note! :')")
+                    print(">>> This will be better if you enter more than one note! :')")
 
                 # assert()
-                # error handling: what if they enter e.g. a,b or Hsharp? print message except catch raise etc
 
                 my_melody = format_input_notes(melody_input)
 
                 print()
-                print(f"Input melody: {my_melody}")
+                print(f">>> Input melody:\n{my_melody}")
 
                 compatible_keys = format_output_notes(
                     analyse_melody2(my_melody, all_keys))
 
                 if compatible_keys == []:
-                    print("Sorry, we couldn't narrow that spicy (or invalid) melody down to one key. Future versions of this program will be able to handle more complex melodies! Please enter a valid melody, or simplify your melody.")
+                    print(">>> Sorry, we couldn't narrow that spicy (or invalid) melody down to one key. Future versions of this program will be able to handle more complex melodies! Please enter a valid melody, or simplify your melody.")
                 else:
                     print(f">>> Compatible keys: {compatible_keys}.")
 
@@ -98,13 +97,13 @@ def main():
                 request = request.split(",")
 
                 print()
-                print(f"Input: {request}")
+                print(f">>> Input: {request}")
 
                 tonic_input = format_input_notes(request[0])
                 quality_input = request[1].strip(" ").lower()
 
                 if len(request) != 2 or len(tonic_input) != 2 or len(quality_input) != 3:
-                    print("Sorry, invalid input. Please try again.")
+                    print(">>> Sorry, invalid input. Please try again.")
                     continue
 
                 result = build_penta(tonic_input, roots,
@@ -126,12 +125,12 @@ def main():
                     "Now enter a scale and a degree between 1 and 7 (e.g. To find the 5th chord in the key of D, enter 'D, 5') separated by a comma: ").split(",")
 
                 print()
-                print(f"Input: {what_chord}")
+                print(f">>> Input: {what_chord}")
 
                 input_note = format_input_notes(what_chord[0])
 
                 if input_note not in all_keys.keys():
-                    print("Sorry, invalid input. Please try again.")
+                    print(">>> Sorry, invalid input. Please try again.")
                     continue
 
                 input_scale = all_keys[input_note]
@@ -153,12 +152,12 @@ def main():
                     "Cool! Okay please enter ONE root note (e.g. D, Ab, or B): ")
 
                 print()
-                print(f"Input: {which_chord_scale}")
+                print(f">>> Input: {which_chord_scale}")
 
                 which_chord_scale = format_input_notes(which_chord_scale)
 
                 if which_chord_scale not in all_keys.keys():
-                    print("Sorry, invalid input. Please try again.")
+                    print(">>> Sorry, invalid input. Please try again.")
                     continue
 
                 which_chord_scale = all_keys[which_chord_scale]
@@ -179,7 +178,7 @@ def main():
 
                 if len(result) == 0:
                     print()
-                    print("Sorry! Nothing to display. Either the input is invalid or these chords don't fit within one key. Future version of this app will be able to help you with more spicy progressions!")
+                    print(">>> Sorry! No result to display. Either the input is invalid or these chords don't fit within one key. Future version of this app will be able to help you with more spicy progressions!")
 
                 else:
                     print(
@@ -193,14 +192,14 @@ def main():
 
             else:
                 print()
-                print("Sorry, invalid! Please enter a number between 1 and 6.")
+                print(">>> Sorry, invalid! Please enter a number between 1 and 6.")
 
         except Exception as e:
             print()
             os.system("clear")
             print()
             print(
-                f"__main__ Oops! Unexpected error: {e}. Please try again with a valid input.")
+                f"__main__ >>> Oops! Unexpected error: {e}. Please try again with a valid input.")
 
 
 # Ensure ... :

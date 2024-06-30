@@ -28,5 +28,5 @@ def build_triad(scale, degree, qualities):
         return name, triad
     
     except Exception as e:
-        print(f"__build_triad__ Oops! Unexpected error: {e}.")
+        print(f"__build_triad__ >>> Oops! Unexpected error: {e}.")
         return ""

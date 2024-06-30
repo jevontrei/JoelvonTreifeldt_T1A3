@@ -42,12 +42,12 @@ def build_penta(tonic, root_notes, quality):
 
             else:
                 print(
-                    "Oops! Please enter a valid root note and 'maj' or 'min' as the quality, or enter 'exit, pls'.")
+                    ">>> Oops! Please enter a valid root note and 'maj' or 'min' as the quality, or enter 'exit, pls'.")
 
                 penta = []
                 return penta
 
     except Exception as e:
         print()
-        print(f"__build_penta__ Oops! Unexpected error: {e}.")
+        print(f"__build_penta__ >>> Oops! Unexpected error: {e}.")
         return ""

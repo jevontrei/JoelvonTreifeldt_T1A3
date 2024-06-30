@@ -24,5 +24,5 @@ def analyse_melody2(mel, keys):
         return compatible
 
     except Exception as e:
-        print(f"__analyse_melody__ Oops! Unexpected error: {e}.")
+        print(f"__analyse_melody__ >>> Oops! Unexpected error: {e}.")
         return ""

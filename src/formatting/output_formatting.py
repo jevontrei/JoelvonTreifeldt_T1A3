@@ -38,5 +38,5 @@ def format_output_chords():
         return
 
     except Exception as e:
-        print(f"__format_output_chords__ Oops! Unexpected error: {e}.")
+        print(f"__format_output_chords__ >>> Oops! Unexpected error: {e}.")
         return ""

@@ -27,7 +27,7 @@ def format_input_notes(notes):
                 input = notes + "_"
 
             else:
-                input = f"Error when parsing '{notes}'! Please enter note name with 1 or 2 characters."
+                input = f">>> Error when parsing '{notes}'! Please enter note name with 1 or 2 characters."
                 return
 
         elif type(notes) == list:
@@ -44,12 +44,12 @@ def format_input_notes(notes):
                     input = set(notes)
 
                 else:
-                    input = f"Error when parsing '{notes[i]}'! Please enter note name/s with 1 or 2 characters."
+                    input = f">>> Error when parsing '{notes[i]}'! Please enter note name/s with 1 or 2 characters."
                     break
 
         else:
             ### TypeError or ValueError?:
-            print("TypeError! Please enter a string or a list.")
+            print(">>> TypeError! Please enter a string or a list.")
             return
 
         return input
@@ -60,7 +60,7 @@ def format_input_notes(notes):
 
     ### do my if/elif/else blocks above need to be replaced by this error handling?:
     except Exception as e:
-        print(f"__format_input_notes__ Whoops! An unexpected error occurred: {e}.")
+        print(f"__format_input_notes__ >>> Whoops! An unexpected error occurred: {e}.")
         
         ### return an empty set instead? make return types consistent!:
         return ""
@@ -79,5 +79,5 @@ def format_input_chords():
         return
 
     except Exception as e:
-        print(f"__format_input_chords__ Oops! Unexpected error: {e}.")
+        print(f"__format_input_chords__ >>> Oops! Unexpected error: {e}.")
         return ""
