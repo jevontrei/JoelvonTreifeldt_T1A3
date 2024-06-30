@@ -1,4 +1,4 @@
-from analysis import analyse_melody2, process_likelihood2, analyse_progression
+from analysis import analyse_melody2, analyse_progression  # , process_likelihood2
 from build_chords import build_triad, build_chord_scale
 from build_scales import build_all_scales, build_penta
 from formatting import format_input_notes, format_output_notes, format_input_chords, format_output_chords
@@ -24,182 +24,183 @@ def main():
     """
 
     while True:
-        # try:
-        # Display welcome message:
-        print()
-        print()
-        print("`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,")
-        print()
-        print()
-        print("Welcome! Let's play. What would you like to investigate?")
-        print()
-        print("1. Analyse a melody")
-        print("2. Build a pentatonic scale")
-        print("3. Find a specific chord within a key")
-        print("4. Build a chord scale")
-        print("5. Analyse a chord progression")
-        print("6. Exit")
-        print()
-
-        # Get initial input from user:
-        selection = int(
-            input("Select an option between 1 and 6: ").strip(" "))
-
-        os.system("clear")
-
-        if selection == 1:
+        try:
+            # Display welcome message:
             print()
-            print("Valid note names:")
-            for i in roots:
-                print(f"> {i}")
+            print()
+            print("`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,`-,")
+            print()
+            print()
+            print("Welcome! Let's play. What would you like to investigate?")
+            print()
+            print("1. Analyse a melody")
+            print("2. Build a pentatonic scale")
+            print("3. Find a specific chord within a key")
+            print("4. Build a chord scale")
+            print("5. Analyse a chord progression")
+            print("6. Exit")
             print()
 
-            # Get input string and split it into a list:
-            melody_input = input(
-                "Enter two or more notes separated by commas, e.g. Db, A, B, E (use flats, not sharps): ").split(",")
+            # Get initial input from user:
+            selection = int(
+                input("Select an option between 1 and 6: ").strip(" "))
 
             os.system("clear")
-            print()
-            print(f"melody_input: {melody_input}")
 
-            if len(melody_input) < 2:
+            if selection == 1:
                 print()
-                print("Sorry, please enter more than one note.")
-                # continue  # UNCOMMENT THIS!
+                print("Valid note names:")
+                for i in roots:
+                    print(f"> {i}")
+                print()
 
-            # assert()
-            # error handling: what if they enter e.g. a,b or Hsharp? print message except catch raise etc
+                # Get input string and split it into a list:
+                melody_input = input(
+                    "Enter two or more notes separated by commas, e.g. Db, A, B, E (use flats, not sharps)...\nIf you're not sure: try building a pentatonic scale (option 2) and using some of those notes! They work together well: ").split(",")
 
-            my_melody = format_input_notes(melody_input)
+                os.system("clear")
+                # print()
+                # print(f"melody_input: {melody_input}")
 
-            print()
-            print(f"Input melody: {my_melody}")
+                if len(melody_input) < 2:
+                    print()
+                    print("This will be better if you enter more than one note! :')")
 
-            most_likely_keys = analyse_melody2(my_melody, all_keys)
-            print(f"most_likely_keys: {most_likely_keys}")
+                # assert()
+                # error handling: what if they enter e.g. a,b or Hsharp? print message except catch raise etc
 
-            formatted_output = format_output_notes(most_likely_keys)
-            print(f"formatted_output: {formatted_output}")
-            result = process_likelihood2(formatted_output)
+                my_melody = format_input_notes(melody_input)
 
-            print()
-            print(result)
+                print()
+                print(f"Input melody: {my_melody}")
 
-            # return ?
+                compatible_keys = format_output_notes(
+                    analyse_melody2(my_melody, all_keys))
 
-        elif selection == 2:
-            print()
-            request = input(
-                "Enter a root note and a quality separated by a comma, e.g. 'E, min' or 'F, maj': ")
+                if compatible_keys == []:
+                    print("Sorry, we couldn't narrow that spicy (or invalid) melody down to one key. Future versions of this program will be able to handle more complex melodies! Please enter a valid melody, or simplify your melody.")
+                else:
+                    print(f">>> Compatible keys: {compatible_keys}.")
 
-            # !Am i doubling up try/except blocks? it's here AND also in the module :S ... HOWEVER for some reason if i delete the main try/except block and just use the inner/module one, when it fails it doesn't go back to prompting user for input. why?
-            # try:
-            request = request.split(",")
+                # result = process_likelihood2(formatted_output)
+                # print()
+                # print(result)
 
-            print()
-            print(f"Input: {request}")
+                # return ?
 
-            tonic_input = format_input_notes(request[0])
-            quality_input = request[1].strip(" ").lower()
+            elif selection == 2:
+                print()
+                request = input(
+                    "Enter a root note and a quality separated by a comma, e.g. 'E, min' or 'F, maj': ")
 
-            if len(request) != 2 or len(tonic_input) != 2 or len(quality_input) != 3:
-                print("Sorry, invalid input. Please try again.")
-                continue
+                # !Am i doubling up try/except blocks? it's here AND also in the module :S ... HOWEVER for some reason if i delete the main try/except block and just use the inner/module one, when it fails it doesn't go back to prompting user for input. why?
+                # try:
+                request = request.split(",")
 
-            result = build_penta(tonic_input, roots,
-                                    quality_input)
+                print()
+                print(f"Input: {request}")
 
-            if result != []:
+                tonic_input = format_input_notes(request[0])
+                quality_input = request[1].strip(" ").lower()
+
+                if len(request) != 2 or len(tonic_input) != 2 or len(quality_input) != 3:
+                    print("Sorry, invalid input. Please try again.")
+                    continue
+
+                result = build_penta(tonic_input, roots,
+                                     quality_input)
+
+                if result != []:
+                    print(
+                        f">>> Your pentatonic scale is {result}.")
+
+                # except Exception as e:
+                #     print()
+                #     print(
+                #         f"__main__ Sorry, unexpected error: {e}. Please enter a valid input.")
+
+            elif selection == 3:
+                print()
+
+                what_chord = input(
+                    "Now enter a scale and a degree between 1 and 7 (e.g. To find the 5th chord in the key of D, enter 'D, 5') separated by a comma: ").split(",")
+
+                print()
+                print(f"Input: {what_chord}")
+
+                input_note = format_input_notes(what_chord[0])
+
+                if input_note not in all_keys.keys():
+                    print("Sorry, invalid input. Please try again.")
+                    continue
+
+                input_scale = all_keys[input_note]
+                input_degree = int(what_chord[1].strip(" "))
+                name, chord = build_triad(
+                    input_scale, input_degree, major_scale_qualities)
+
+                # now don't forget to unformat chord!!!
+                # format_output_chords()
+
                 print(
-                    f">>> Your pentatonic scale is {result}.")
+                    f">>> In the key of {input_note}, chord {input_degree} is {name}: {chord}.")
 
-            # except Exception as e:
-            #     print()
-            #     print(
-            #         f"__main__ Sorry, unexpected error: {e}. Please enter a valid input.")
+                # return ?
 
-        elif selection == 3:
-            print()
+            elif selection == 4:
+                print()
+                which_chord_scale = input(
+                    "Cool! Okay please enter ONE root note (e.g. D, Ab, or B): ")
 
-            what_chord = input(
-                "Now enter a scale and a degree between 1 and 7 (e.g. To find the 5th chord in the key of D, enter 'D, 5') separated by a comma: ").split(",")
+                print()
+                print(f"Input: {which_chord_scale}")
 
-            print()
-            print(f"Input: {what_chord}")
+                which_chord_scale = format_input_notes(which_chord_scale)
 
-            input_note = format_input_notes(what_chord[0])
+                if which_chord_scale not in all_keys.keys():
+                    print("Sorry, invalid input. Please try again.")
+                    continue
 
-            if input_note not in all_keys.keys():
-                print("Sorry, invalid input. Please try again.")
-                continue
+                which_chord_scale = all_keys[which_chord_scale]
 
-            input_scale = all_keys[input_note]
-            input_degree = int(what_chord[1].strip(" "))
-            name, chord = build_triad(
-                input_scale, input_degree, major_scale_qualities)
-
-            # now don't forget to unformat chord!!!
-            # format_output_chords()
-
-            print(
-                f">>> In the key of {input_note}, chord {input_degree} is {name}: {chord}.")
+                chord_scale, chord_names = build_chord_scale(
+                    which_chord_scale, major_scale_qualities)
 
             # return ?
 
-        elif selection == 4:
-            print()
-            which_chord_scale = input(
-                "Cool! Okay please enter ONE root note (e.g. D, Ab, or B): ")
-
-            print()
-            print(f"Input: {which_chord_scale}")
-
-            which_chord_scale = format_input_notes(which_chord_scale)
-
-            if which_chord_scale not in all_keys.keys():
-                print("Sorry, invalid input. Please try again.")
-                continue
-
-            which_chord_scale = all_keys[which_chord_scale]
-
-            chord_scale, chord_names = build_chord_scale(
-                which_chord_scale, major_scale_qualities)
-
-        # return ?
-
-        elif selection == 5:
-            print()
-
-            my_progression = input(
-                "Enter a progression of triads from a single key, separated by commas, e.g. 'Emin, Amin, Dmin, Gmaj'.\n(Hint: use the chord scale builder (option 4) if unsure of which chords fit together): ").lower()
-
-            result = analyse_progression(
-                my_progression, all_keys, major_scale_qualities)
-
-            if len(result) == 0:
+            elif selection == 5:
                 print()
-                print("Sorry! Nothing to display. Either the input is invalid or these chords don't fit within one key. Future version of this app will be able to help you with more spicy progressions!")
+
+                my_progression = input(
+                    "Enter a progression of triads from a single key, separated by commas, e.g. 'Emin, Amin, Dmin, Gmaj'.\n(Hint: use the chord scale builder (option 4) if unsure of which chords fit together): ").lower()
+
+                result = analyse_progression(
+                    my_progression, all_keys, major_scale_qualities)
+
+                if len(result) == 0:
+                    print()
+                    print("Sorry! Nothing to display. Either the input is invalid or these chords don't fit within one key. Future version of this app will be able to help you with more spicy progressions!")
+
+                else:
+                    print(
+                        f">>> These chord/s fit within the key/s of {result}.")
+
+            elif selection == 6:
+                print()
+                print(">>> So long! Thanks for playing.")
+                print()
+                return
 
             else:
-                print(
-                    f">>> These chord/s fit within the key/s of {result}.")
+                print()
+                print("Sorry, invalid! Please enter a number between 1 and 6.")
 
-        elif selection == 6:
+        except Exception as e:
             print()
-            print(">>> So long! Thanks for playing.")
+            os.system("clear")
             print()
-            return
-
-        else:
-            print()
-            print("Sorry, invalid! Please enter a number between 1 and 6.")
-
-        # except Exception as e:
-        #     print()
-        #     os.system("clear")
-        #     print()
-        #     print(
-        #         f"__main__ Oops! Unexpected error: {e}. Please try again with a valid input.")
+            print(
+                f"__main__ Oops! Unexpected error: {e}. Please try again with a valid input.")
 
 
 # Ensure ... :
