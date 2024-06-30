@@ -1,9 +1,11 @@
-from analysis import analyse_melody2, analyse_progression  # , process_likelihood2
+# Import internal and external modules/packages:
+from analysis import analyse_melody, analyse_progression
 from build_chords import build_triad, build_chord_scale
 from build_scales import build_all_scales, build_penta
 from formatting import format_input_notes, format_output_notes, format_input_chords, format_output_chords
 import os
 
+# Clear the terminal:
 os.system("clear")
 
 # Initialise global variables; Define root note names, scale intervals, scale qualities, and keys:
@@ -23,6 +25,7 @@ def main():
         _type_: _description_
     """
 
+    # Loop over the main() function / user input prompt "while True" until a return statement is encountered:
     while True:
         try:
             # Display welcome message:
@@ -41,7 +44,7 @@ def main():
             print("6. Exit")
             print()
 
-            # Get initial input from user:
+            # Ask user to choose an activity:
             selection = int(
                 input("Select an option between 1 and 6: ").strip(" "))
 
@@ -49,52 +52,57 @@ def main():
 
             if selection == 1:
                 print()
+                
+                # Display legal inputs:
                 print("Valid note names:")
                 for i in roots:
                     print(f"> {i}")
+                    
                 print()
 
-                # Get input string and split it into a list:
+                # Get input melody string and split it into a list:
                 melody_input = input(
                     "Enter two or more notes separated by commas, e.g. Db, A, B, E (use flats, not sharps)...\nIf you're not sure: try building a pentatonic scale (option 2) and using some of those notes! They work together well: ").split(",")
 
                 os.system("clear")
-                # print()
-                # print(f"melody_input: {melody_input}")
 
+                # Advise user that a one-note melody won't produce a very meaningful result:
                 if len(melody_input) < 2:
                     print()
-                    print(">>> This will be better if you enter more than one note! :')")
+                    print(">>> Pssst! The result will be more meaningful if you enter more than one note! :')")
 
                 # assert()
 
+                # Format input list text for compatibility with the  "roots" and "all_keys" variables:
                 my_melody = format_input_notes(melody_input)
 
                 print()
+                
+                # Display formatted input:
                 print(f">>> Input melody:\n{my_melody}")
 
+                # Call melody analyser module:
                 compatible_keys = format_output_notes(
-                    analyse_melody2(my_melody, all_keys))
+                    analyse_melody(my_melody, all_keys))
 
+                # Advise user that nothing meaningful was found:
                 if compatible_keys == []:
                     print(">>> Sorry, we couldn't narrow that spicy (or invalid) melody down to one key. Future versions of this program will be able to handle more complex melodies! Please enter a valid melody, or simplify your melody.")
+                    
                 else:
                     print(f">>> Compatible keys: {compatible_keys}.")
-
-                # result = process_likelihood2(formatted_output)
-                # print()
-                # print(result)
 
                 # return ?
 
             elif selection == 2:
                 print()
+                
+                # Get pentatonic scale name from user and split it into a list:
                 request = input(
-                    "Enter a root note and a quality separated by a comma, e.g. 'E, min' or 'F, maj': ")
+                    "Enter a root note and a quality separated by a comma, e.g. 'E, min' or 'F, maj': ").split(",")
 
                 # !Am i doubling up try/except blocks? it's here AND also in the module :S ... HOWEVER for some reason if i delete the main try/except block and just use the inner/module one, when it fails it doesn't go back to prompting user for input. why?
                 # try:
-                request = request.split(",")
 
                 print()
                 print(f">>> Input: {request}")

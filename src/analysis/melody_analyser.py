@@ -1,6 +1,6 @@
 # This function ...
 
-def analyse_melody2(mel, keys):
+def analyse_melody(mel, keys):
     """_summary_
 
     Args:
