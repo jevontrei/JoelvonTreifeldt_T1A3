@@ -22,7 +22,7 @@ https://github.com/jevontrei/JoelvonTreifeldt_T1A3
 
 ## R5
 
-Prettier? reference?
+Prettier? reference? Angus: black for python
 
 ### Features
 
